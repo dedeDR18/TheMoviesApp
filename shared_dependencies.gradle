@@ -16,6 +16,9 @@ dependencies {
     implementation "io.insert-koin:koin-android:$koin_version"
     implementation "io.insert-koin:koin-android-viewmodel:$koin_version"
 
+    //paging
+    implementation "androidx.paging:paging-runtime:$paging_version"
+
     //add lottie libs
     implementation "com.airbnb.android:lottie:$lottie_version"
 
