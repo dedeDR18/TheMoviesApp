@@ -17,6 +17,6 @@ import kotlinx.coroutines.launch
 
 class GenresViewModel(private val usecase: TmdbUsecase) : ViewModel(){
 
-    fun genres(): LiveData<List<Genre>> = usecase.getGenre().asLiveData()
+    val genres = usecase.getGenre().asLiveData()
 
 }

@@ -7,11 +7,9 @@
     android:layout_height="match_parent"
     tools:context=".ui.genres.GenresFragment">
 
-   <TextView
-       android:text="@string/title_genres"
-       android:layout_centerInParent="true"
-       android:id="@+id/tv_genres"
-       android:layout_width="wrap_content"
+   <ListView
+       android:id="@+id/lv_genre"
+       android:layout_width="match_parent"
        android:layout_height="wrap_content"/>
 
 </RelativeLayout>
