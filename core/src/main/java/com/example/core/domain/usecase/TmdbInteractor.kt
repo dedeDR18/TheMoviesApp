@@ -1,6 +1,7 @@
 package com.example.core.domain.usecase
 
 import com.example.core.domain.model.Genre
+import com.example.core.domain.model.Movie
 import com.example.core.domain.repository.ITmdbRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.Flow
@@ -17,4 +18,7 @@ class TmdbInteractor (private val repository: ITmdbRepository) : TmdbUsecase{
 
     override fun getGenre(): Flow<List<Genre>> = repository.getGenre()
 
+    override fun fetchMovieByGenre(genreId: Int, page: Int, coroutineScope: CoroutineScope) = repository.fetchMovieByGenre(genreId,page, coroutineScope)
+
+    override fun getMovieByGenre(genreId: Int): Flow<List<Movie>> = repository.getMovieByGenre(genreId)
 }

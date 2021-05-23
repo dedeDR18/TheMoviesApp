@@ -1,6 +1,7 @@
 package com.example.core.domain.repository
 
 import com.example.core.domain.model.Genre
+import com.example.core.domain.model.Movie
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.Flow
 
@@ -13,4 +14,6 @@ import kotlinx.coroutines.flow.Flow
 interface ITmdbRepository {
     fun getGenre(): Flow<List<Genre>>
     fun fetchGenre(coroutineScope: CoroutineScope)
+    fun fetchMovieByGenre(genreId: Int, page: Int, coroutineScope: CoroutineScope)
+    fun getMovieByGenre(genreId: Int): Flow<List<Movie>>
 }

@@ -1,10 +1,12 @@
 package com.example.core.data.source.local.room
 
+import androidx.paging.PagingSource
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.example.core.data.source.local.entity.GenreEntity
+import com.example.core.data.source.local.entity.MovieEntity
 import kotlinx.coroutines.flow.Flow
 
 /**
@@ -21,4 +23,10 @@ interface TmdbDao{
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertGenre(listGenre: List<GenreEntity>)
+
+    @Query("SELECT * FROM movieentities WHERE CHARINDEX(:genreId, genre_ids) > 0")
+    fun getMovieByGenre(genreId: Int): Flow<List<MovieEntity>>
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertMovies(listMovies: List<MovieEntity>)
 }

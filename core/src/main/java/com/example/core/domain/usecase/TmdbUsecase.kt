@@ -1,6 +1,7 @@
 package com.example.core.domain.usecase
 
 import com.example.core.domain.model.Genre
+import com.example.core.domain.model.Movie
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.Flow
 
@@ -15,4 +16,6 @@ import kotlinx.coroutines.flow.Flow
 interface TmdbUsecase{
     fun fetchGenre(coroutineScope: CoroutineScope)
     fun getGenre(): Flow<List<Genre>>
+    fun fetchMovieByGenre(genreId: Int, page: Int, coroutineScope: CoroutineScope)
+    fun getMovieByGenre(genreId: Int): Flow<List<Movie>>
 }

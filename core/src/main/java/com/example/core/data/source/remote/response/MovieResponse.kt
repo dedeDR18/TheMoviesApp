@@ -1,6 +1,6 @@
 package com.example.core.data.source.remote.response
 
-data class movieResponse(
+data class MovieResponse(
     val adult: Boolean,
     val backdrop_path: String?,
     val genre_ids: List<Int>,

@@ -4,6 +4,7 @@ import android.util.Log
 import com.example.core.data.source.local.room.TmdbDao
 import com.example.core.data.source.remote.network.TmdbService
 import com.example.core.domain.model.Genre
+import com.example.core.domain.model.Movie
 import com.example.core.domain.repository.ITmdbRepository
 import com.example.core.utils.DataMapper
 import kotlinx.coroutines.CoroutineScope
@@ -47,5 +48,32 @@ class TmdbRepository(private val apiService: TmdbService, val tmdbDao: TmdbDao) 
             }
         }
     }
+
+    override fun fetchMovieByGenre(genreId: Int, page: Int, coroutineScope: CoroutineScope) {
+        coroutineScope.launch {
+            try {
+                val response = apiService.fetchMovieListByGenre(genreId, page).awaitResponse()
+                if (response.isSuccessful) {
+                    val data = response.body()
+                    data?.results.let { list ->
+                        list?.let {
+                            tmdbDao.insertMovies(DataMapper.mapMovieResponseToMovieEntity(list))
+                        }
+                    }
+                } else {
+                    Log.d("TAG", "gagal execute Api...")
+                }
+            } catch (e: Exception) {
+                Log.d("TAG", "error = ${e.message}")
+            }
+        }
+    }
+
+    override fun getMovieByGenre(genreId: Int): Flow<List<Movie>> = flow {
+        tmdbDao.getMovieByGenre(genreId).collect { listMovieByGenre ->
+            emit(DataMapper.mapMovieEntityToMovieDomain(listMovieByGenre))
+        }
+    }
+
 
 }
