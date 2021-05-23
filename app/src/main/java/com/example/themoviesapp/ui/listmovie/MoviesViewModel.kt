@@ -1,6 +1,8 @@
 package com.example.themoviesapp.ui.listmovie
 
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.asLiveData
+import androidx.lifecycle.viewModelScope
 import com.example.core.domain.usecase.TmdbUsecase
 
 /**
@@ -12,4 +14,9 @@ import com.example.core.domain.usecase.TmdbUsecase
 
 class MoviesViewModel(private val usecase: TmdbUsecase): ViewModel(){
 
+    fun fetchMoviesByGenre(genreId: Int){
+        usecase.fetchMovieByGenre(genreId, 1, viewModelScope)
+    }
+
+    fun movies(genreId: Int) = usecase.getMovieByGenre(genreId).asLiveData()
 }

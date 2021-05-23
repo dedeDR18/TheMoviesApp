@@ -24,7 +24,7 @@ interface TmdbDao{
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertGenre(listGenre: List<GenreEntity>)
 
-    @Query("SELECT * FROM movieentities WHERE CHARINDEX(:genreId, genre_ids) > 0")
+    @Query("SELECT * FROM movieentities WHERE genre_ids LIKE '%' || :genreId || '%'")
     fun getMovieByGenre(genreId: Int): Flow<List<MovieEntity>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)

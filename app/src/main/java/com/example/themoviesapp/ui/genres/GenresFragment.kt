@@ -66,9 +66,9 @@ class GenresFragment : Fragment() {
             adapter = arrayAdapter
 
            onItemClickListener = AdapterView.OnItemClickListener { parent, view, position, id ->
-               val selectedItem:Genre = parent.getItemAtPosition(position) as Genre
-               Toast.makeText(requireContext(),"clicked = ${selectedItem.name}", Toast.LENGTH_SHORT).show()
-               navigateToMovieFragment(selectedItem)
+               val selectedItem = parent.getItemAtPosition(position)
+               Toast.makeText(requireContext(),"clicked = ${selectedItem}", Toast.LENGTH_SHORT).show()
+               navigateToMovieFragment(data[position])
            }
         }
     }

@@ -5,4 +5,14 @@
     <string name="title_genres">lgenres</string>
     <string name="title_movies">movies</string>
     <string name="title_detail_movie">detail movie</string>
+    <string name="title">title</string>
+    <string name="popularity">1818</string>
+    <string name="date">18/12/1995</string>
+    <string name="movie_title">Title</string>
+    <string name="movie_date_release">Date Release</string>
+    <string name="movie_vote_avarage">Vote</string>
+    <string name="movie_language">Language</string>
+    <string name="popularitas">Popularity</string>
+    <string name="movie_description">Description</string>
+    <string name="movie_review">Review</string>
 </resources>
