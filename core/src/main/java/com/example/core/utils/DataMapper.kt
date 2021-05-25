@@ -44,18 +44,18 @@ object DataMapper {
             val m = MovieEntity(
                 id = input.id,
                 adult = input.adult,
-                backdrop_path = input.backdrop_path,
-                genre_ids = input.genre_ids,
-                original_language = input.original_language,
-                original_title = input.original_title,
+                backdropPath = input.backdrop_path,
+                genreIds = input.genre_ids,
+                originalLanguage = input.original_language,
+                originalTitle = input.original_title,
                 overview = input.overview,
                 popularity = input.popularity,
-                poster_path = input.poster_path,
-                release_date = input.release_date,
+                posterPath = input.poster_path,
+                releaseDate = input.release_date,
                 title = input.title,
                 video = input.video,
-                vote_average = input.vote_average,
-                vote_count = input.vote_count
+                voteAverage = input.vote_average,
+                voteCount = input.vote_count
             )
             arrayList.add(m)
         }
@@ -68,16 +68,38 @@ object DataMapper {
             val m = Movie(
                 id = input.id,
                 adult = input.adult,
-                genre_ids = input.genre_ids,
-                original_language = input.original_language,
-                original_title = input.original_title,
+                genreIds = input.genreIds,
+                originalLanguage = input.originalLanguage,
+                originalTitle = input.originalTitle,
                 overview = input.overview,
                 popularity = input.popularity,
-                poster_path = input.poster_path,
-                release_date = input.release_date,
+                posterPath = input.posterPath,
+                releaseDate = input.releaseDate,
                 title = input.title,
-                vote_average = input.vote_average,
-                vote_count = input.vote_count
+                voteAverage = input.voteAverage,
+                voteCount = input.voteCount
+            )
+            arrayList.add(m)
+        }
+        return arrayList
+    }
+
+    fun mapMovieResponseToMovieDomain(input: List<MovieResponse>): List<Movie>{
+        val arrayList = ArrayList<Movie>()
+        input.map { input ->
+            val m = Movie(
+                id = input.id,
+                adult = input.adult,
+                genreIds = input.genre_ids,
+                originalLanguage = input.original_language,
+                originalTitle = input.original_title,
+                overview = input.overview,
+                popularity = input.popularity,
+                posterPath = input.poster_path,
+                releaseDate = input.release_date,
+                title = input.title,
+                voteAverage = input.vote_average,
+                voteCount = input.vote_count
             )
             arrayList.add(m)
         }

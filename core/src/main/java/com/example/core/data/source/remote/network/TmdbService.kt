@@ -25,4 +25,10 @@ interface TmdbService {
         @Query("with_genres") genreId: Int,
         @Query("page") page: Int
     ): Call<TmdbListMovieByGenreResponse>
+
+    @GET("discover/movie?api_key=${BuildConfig.API_KEY}")
+    fun fetchMovieListByGenreWithPaging(
+        @Query("with_genres") genreId: Int,
+        @Query("page") page: Int
+    ): TmdbListMovieByGenreResponse
 }

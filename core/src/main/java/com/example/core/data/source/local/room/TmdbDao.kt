@@ -24,9 +24,17 @@ interface TmdbDao{
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertGenre(listGenre: List<GenreEntity>)
 
-    @Query("SELECT * FROM movieentities WHERE genre_ids LIKE '%' || :genreId || '%'")
+    @Query("SELECT * FROM movieentities WHERE genreIds LIKE '%' || :genreId || '%' ORDER BY updateAt ASC")
     fun getMovieByGenre(genreId: Int): Flow<List<MovieEntity>>
+
+
+    //nanti edit berdasarkan genre
+    @Query("SELECT * FROM movieentities")
+    fun getAllMovieByGenre(): PagingSource<Int, MovieEntity>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertMovies(listMovies: List<MovieEntity>)
+
+    @Query("DELETE FROM movieentities")
+    suspend fun clearMovies()
 }

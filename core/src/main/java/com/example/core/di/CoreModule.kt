@@ -5,8 +5,6 @@ import com.example.core.data.source.TmdbRepository
 import com.example.core.data.source.local.room.TmdbDatabase
 import com.example.core.data.source.remote.network.TmdbService
 import com.example.core.domain.repository.ITmdbRepository
-import com.example.core.domain.usecase.TmdbInteractor
-import com.example.core.domain.usecase.TmdbUsecase
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.android.ext.koin.androidContext
@@ -24,6 +22,7 @@ import java.util.concurrent.TimeUnit
 
 val databaseModule = module {
     factory { get<TmdbDatabase>().tmdbDao() }
+    factory { get<TmdbDatabase>().tmdbPagesKeyDao() }
     single {
         Room.databaseBuilder(
             androidContext(),
@@ -40,7 +39,7 @@ val networkModule = module {
 }
 
 val repositoryModule = module {
-    single<ITmdbRepository> { TmdbRepository(get(),get()) }
+    single<ITmdbRepository> { TmdbRepository(get(), get()) }
 }
 
 private fun createRetrofit(okHttpClient: OkHttpClient): TmdbService {
