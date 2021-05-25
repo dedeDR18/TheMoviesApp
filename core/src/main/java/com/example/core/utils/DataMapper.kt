@@ -2,10 +2,14 @@ package com.example.core.utils
 
 import com.example.core.data.source.local.entity.GenreEntity
 import com.example.core.data.source.local.entity.MovieEntity
+import com.example.core.data.source.remote.response.AuthorDetailsResponse
 import com.example.core.data.source.remote.response.GenreItem
 import com.example.core.data.source.remote.response.MovieResponse
+import com.example.core.data.source.remote.response.ReviewResponseItem
+import com.example.core.domain.model.AuthorDetails
 import com.example.core.domain.model.Genre
 import com.example.core.domain.model.Movie
+import com.example.core.domain.model.Review
 
 /**
  * Created on : 21/05/21 | 12.54
@@ -84,7 +88,7 @@ object DataMapper {
         return arrayList
     }
 
-    fun mapMovieResponseToMovieDomain(input: List<MovieResponse>): List<Movie>{
+    fun mapMovieResponseToMovieDomain(input: List<MovieResponse>): List<Movie> {
         val arrayList = ArrayList<Movie>()
         input.map { input ->
             val m = Movie(
@@ -105,4 +109,30 @@ object DataMapper {
         }
         return arrayList
     }
+
+    fun mapReviewResponseToReviewDomain(input: List<ReviewResponseItem?>): List<Review> {
+        val arrayList = ArrayList<Review>()
+        input.map { data ->
+            data?.let { input ->
+                val r = Review(
+                    author = input.author,
+                    authorDetails = mapAuthorDetailsResponseToAuthorDetailsDomain(input = input.author_details),
+                    content = input.content,
+                    createdAt = input.created_at,
+                    id = input.id,
+                    updatedAt = input.updated_at,
+                    url = input.url
+                )
+                arrayList.add(r)
+            }
+        }
+        return arrayList
+    }
+
+    fun mapAuthorDetailsResponseToAuthorDetailsDomain(input: AuthorDetailsResponse) = AuthorDetails(
+        avatarPath = input.avatar_path,
+        name = input.name,
+        rating = input.rating,
+        username = input.username
+    )
 }

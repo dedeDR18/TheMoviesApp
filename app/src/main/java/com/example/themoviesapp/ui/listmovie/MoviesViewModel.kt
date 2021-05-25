@@ -16,16 +16,10 @@ import kotlinx.coroutines.flow.Flow
  * Email      : dededarirahmadi@gmail.com
  */
 
-class MoviesViewModel(private val usecase: TmdbUsecase): ViewModel(){
+class MoviesViewModel(private val usecase: TmdbUsecase) : ViewModel() {
 
-//    fun fetchMoviesByGenre() : Flow<PagingData<MovieEntity>> {
-//        return usecase.getMovieByGenrePagingFlow().cachedIn(viewModelScope)
-//    }
-    fun fetchMoviesByGenre(genreId: Int, page: Int) = usecase.fetchMovieByGenre(genreId, page).asLiveData()
-
-
-
-    //fun movies(genreId: Int) = usecase.getMovieByGenre(genreId).asLiveData()
+    fun fetchMoviesByGenre(genreId: Int, page: Int) =
+        usecase.fetchMovieByGenre(genreId, page).asLiveData()
 
     fun lastestPageExecute(genreId: Int) = usecase.getCurrentPage(genreId).asLiveData()
 

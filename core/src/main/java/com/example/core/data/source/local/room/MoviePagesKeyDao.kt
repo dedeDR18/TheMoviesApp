@@ -15,12 +15,6 @@ import kotlinx.coroutines.flow.Flow
  */
 @Dao
 interface MoviePagesKeyDao {
-//    @Insert(onConflict = OnConflictStrategy.REPLACE)
-//    suspend fun saveMoviePageKeys(redditKey: MoviePagesKey)
-//
-//    @Query("SELECT * FROM tmdbpageskey ORDER BY id DESC")
-//    suspend fun getMoviePagesKey(): List<MoviePagesKey>
-
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun saveMoviePageKeys(moviePagesKey: List<MoviePagesKey>)
 

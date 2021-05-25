@@ -15,6 +15,7 @@ import com.example.core.data.source.remote.network.TmdbService
 import com.example.core.data.source.remote.response.MovieResponse
 import com.example.core.domain.model.Genre
 import com.example.core.domain.model.Movie
+import com.example.core.domain.model.Review
 import com.example.core.domain.repository.ITmdbRepository
 import com.example.core.utils.DataMapper
 import kotlinx.coroutines.CoroutineScope
@@ -67,12 +68,12 @@ class TmdbRepository(
         emit(Resource.Loading())
         try {
             val response = apiService.fetchMovieListByGenre(genreId, page).awaitResponse()
-            if (response.isSuccessful){
+            if (response.isSuccessful) {
                 val data = response.body()
                 data?.let {
-                    val listMovie = data.results
-                    val currentPage = data.page
-                    val totalPage = data.total_pages
+                    val listMovie = it.results
+                    val currentPage = it.page
+                    val totalPage = it.total_pages
                     tmdbDatabase.tmdbPagesKeyDao().saveMoviePageKeys(
                         listOf(
                             MoviePagesKey(
@@ -89,43 +90,10 @@ class TmdbRepository(
                 Log.d("TAG", "Error Api..")
                 emit(Resource.Error("Error Api.."))
             }
-        } catch (e: Exception){
+        } catch (e: Exception) {
             emit(Resource.Error("Error ${e.message}"))
         }
     }
-
-//    override fun fetchMovieByGenre(genreId: Int, page: Int, coroutineScope: CoroutineScope) {
-//        coroutineScope.launch {
-//            try {
-//                val response = apiService.fetchMovieListByGenre(genreId, page).awaitResponse()
-//                if (response.isSuccessful) {
-//                    val data = response.body()
-//                    data?.let { response ->
-//                        tmdbDatabase.tmdbPagesKeyDao().saveMoviePageKeys(
-//                            listOf(
-//                                MoviePagesKey(
-//                                    genreId,
-//                                    response.page,
-//                                    response.total_pages
-//                                )
-//                            )
-//                        )
-//                    }
-//
-//                    data?.results.let { list ->
-//                        list?.let {
-//                            tmdbDatabase.tmdbDao()
-//                                .insertMovies(DataMapper.mapMovieResponseToMovieEntity(list))
-//                        }
-//                    }
-//                } else {
-//                    Log.d("TAG", "gagal execute Api...")
-//                }
-//            } catch (e: Exception) {
-//                Log.d("TAG", "error = ${e.message}")
-//            }
-//        }
-//    }
 
     override fun getMovieByGenre(genreId: Int): Flow<List<Movie>> = flow {
         tmdbDatabase.tmdbDao().getMovieByGenre(genreId).collect { listMovieByGenre ->
@@ -139,18 +107,22 @@ class TmdbRepository(
         }
     }
 
-
-//    @OptIn(ExperimentalPagingApi::class)
-//    override fun getMovieByGenrePagingFlow(): Flow<PagingData<MovieEntity>> {
-//        val pagingSourceFactory = { tmdbDatabase.tmdbDao().getAllMovieByGenre() }
-//        val remoteMediator = MovieRemoteMediator(apiService = apiService, tmdbDatabase = tmdbDatabase)
-//        Log.d("TAG", "TEREKSEKUSI 1")
-//        return Pager(
-//            config = PagingConfig(pageSize = DEFAULT_PAGE_SIZE, enablePlaceholders = true),
-//            remoteMediator = remoteMediator,
-//            pagingSourceFactory = pagingSourceFactory,
-//        ).flow
-//    }
-
-
+    override fun fetchMovieReview(movieId: Int, page: Int) = flow<Resource<List<Review>>> {
+        emit(Resource.Loading())
+        try {
+            val response = apiService.fetchMovieReview(movieId, page).awaitResponse()
+            if (response.isSuccessful){
+                val data = response.body()
+                data?.let {
+                    val listReview = it.results
+                    emit(Resource.Success(DataMapper.mapReviewResponseToReviewDomain(listReview)))
+                }
+            } else {
+                Log.d("TAG", "Error Api..")
+                emit(Resource.Error("Error Api.."))
+            }
+        } catch (e: Exception) {
+            emit(Resource.Error("Error ${e.message}"))
+        }
     }
+}

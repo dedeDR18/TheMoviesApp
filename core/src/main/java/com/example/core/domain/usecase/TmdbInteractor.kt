@@ -6,6 +6,7 @@ import com.example.core.data.source.local.entity.MovieEntity
 import com.example.core.data.source.local.entity.MoviePagesKey
 import com.example.core.domain.model.Genre
 import com.example.core.domain.model.Movie
+import com.example.core.domain.model.Review
 import com.example.core.domain.repository.ITmdbRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.Flow
@@ -29,6 +30,9 @@ class TmdbInteractor(private val repository: ITmdbRepository) : TmdbUsecase {
 
     override fun getCurrentPage(genreId: Int): Flow<MoviePagesKey> =
         repository.getCurrentPage(genreId)
+
+    override fun fetchMovieReview(movieId: Int, page: Int): Flow<Resource<List<Review>>> =
+        repository.fetchMovieReview(movieId, page)
 
     //paging 3
     //override fun getMovieByGenrePagingFlow(): Flow<PagingData<MovieEntity>> = repository.getMovieByGenrePagingFlow()

@@ -19,11 +19,8 @@ class SplashFragment : Fragment() {
 
     private var _binding: FragmentSplashBinding? = null
     private val binding get() = _binding!!
-
-    private val splashViewModel:SplashViewModel by viewModel()
-
+    private val splashViewModel: SplashViewModel by viewModel()
     private lateinit var navController: NavController
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,7 +43,7 @@ class SplashFragment : Fragment() {
 
         navController = Navigation.findNavController(view)
 
-        binding.lottieAnim.addAnimatorListener(object :Animator.AnimatorListener{
+        binding.lottieAnim.addAnimatorListener(object : Animator.AnimatorListener {
             override fun onAnimationStart(animation: Animator?) {
 
             }

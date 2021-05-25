@@ -65,14 +65,13 @@ class GenresFragment : Fragment() {
                 ArrayAdapter(requireActivity(), android.R.layout.simple_list_item_1, name)
             adapter = arrayAdapter
 
-           onItemClickListener = AdapterView.OnItemClickListener { parent, view, position, id ->
-               val selectedItem = parent.getItemAtPosition(position)
-               navigateToMovieFragment(data[position])
-           }
+            onItemClickListener = AdapterView.OnItemClickListener { parent, view, position, id ->
+                navigateToMovieFragment(data[position])
+            }
         }
     }
 
-    fun navigateToMovieFragment(genre: Genre){
+    fun navigateToMovieFragment(genre: Genre) {
         val bundle = bundleOf(
             "genre" to genre
         )

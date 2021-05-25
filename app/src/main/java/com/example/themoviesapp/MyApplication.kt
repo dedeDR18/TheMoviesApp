@@ -18,21 +18,21 @@ import org.koin.core.logger.Level
  * Email      : dededarirahmadi@gmail.com
  */
 
-class MyApplication : Application(){
+class MyApplication : Application() {
     override fun onCreate() {
         super.onCreate()
-            startKoin {
-                androidLogger(Level.NONE)
-                androidContext(this@MyApplication)
-                modules(
-                    listOf(
-                        databaseModule,
-                        networkModule,
-                        repositoryModule,
-                        useCaseModule,
-                        viewmodelModule
-                    )
+        startKoin {
+            androidLogger(Level.NONE)
+            androidContext(this@MyApplication)
+            modules(
+                listOf(
+                    databaseModule,
+                    networkModule,
+                    repositoryModule,
+                    useCaseModule,
+                    viewmodelModule
                 )
-            }
+            )
+        }
     }
 }

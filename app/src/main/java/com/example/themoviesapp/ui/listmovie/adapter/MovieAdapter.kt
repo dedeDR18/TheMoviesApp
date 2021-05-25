@@ -19,18 +19,16 @@ class MovieAdapter : RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
 
     val listData = ArrayList<Movie>()
     var onLoadMore: (() -> Unit)? = null
+    var onClickItem: ((Movie) -> Unit)? = null
 
-
-
-    fun setData(listMovie: List<Movie>){
+    fun setData(listMovie: List<Movie>) {
         if (listMovie == null) return
         listData.clear()
         listData.addAll(listMovie)
         notifyDataSetChanged()
     }
 
-    fun updateData(listMovie: List<Movie>){
-
+    fun updateData(listMovie: List<Movie>) {
         val insertIndex = listData.size - 1
         listData.addAll(insertIndex, listMovie)
         notifyItemRangeInserted(insertIndex, listMovie.size)
@@ -49,7 +47,6 @@ class MovieAdapter : RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
             )
         )
 
-
     override fun onBindViewHolder(holder: MovieAdapter.MovieViewHolder, position: Int) {
         val currentData = listData[position]
         holder.bind(currentData)
@@ -63,9 +60,9 @@ class MovieAdapter : RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
         RecyclerView.ViewHolder(binding.root) {
         fun bind(data: Movie) {
             binding.movie = data
+            binding.root.setOnClickListener {
+                onClickItem?.invoke(data)
+            }
         }
     }
-
-
-
 }

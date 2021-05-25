@@ -6,6 +6,7 @@ import com.example.core.data.source.local.entity.MovieEntity
 import com.example.core.data.source.local.entity.MoviePagesKey
 import com.example.core.domain.model.Genre
 import com.example.core.domain.model.Movie
+import com.example.core.domain.model.Review
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.Flow
 
@@ -23,6 +24,7 @@ interface TmdbUsecase{
     fun fetchMovieByGenre(genreId: Int, page: Int): Flow<Resource<List<Movie>>>
     fun getMovieByGenre(genreId: Int): Flow<List<Movie>>
     fun getCurrentPage(genreId: Int): Flow<MoviePagesKey>
+    fun fetchMovieReview(movieId: Int, page: Int): Flow<Resource<List<Review>>>
 
     //paging 3
     //fun getMovieByGenrePagingFlow(): Flow<PagingData<MovieEntity>>
