@@ -30,6 +30,5 @@ object BindingAdapters : KoinComponent {
                 .into(view)
         }
     }
-
 }
 

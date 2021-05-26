@@ -35,6 +35,4 @@ class TmdbInteractor(private val repository: ITmdbRepository) : TmdbUsecase {
 
     override fun getReviewCurrentPage(movieId: Int): Flow<ReviewPagesKey> =
         repository.getReviewCurrentPage(movieId)
-
-
 }

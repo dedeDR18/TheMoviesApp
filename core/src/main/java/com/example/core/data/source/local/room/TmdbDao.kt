@@ -27,8 +27,6 @@ interface TmdbDao {
     @Query("SELECT * FROM movieentities WHERE genreIds LIKE '%' || :genreId || '%' ORDER BY updateAt ASC")
     fun getMovieByGenre(genreId: Int): Flow<List<MovieEntity>>
 
-
-    //nanti edit berdasarkan genre
     @Query("SELECT * FROM movieentities")
     fun getAllMovieByGenre(): PagingSource<Int, MovieEntity>
 
