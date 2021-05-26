@@ -22,7 +22,7 @@ object BindingAdapters : KoinComponent {
     @BindingAdapter("glideSrc")
     @JvmStatic
     fun setGlideImage(view: ImageView, imageUrl: String?) {
-        imageUrl?.let{
+        imageUrl?.let {
             Glide.with(view.context)
                 .load("https://image.tmdb.org/t/p/w600_and_h900_bestv2".plus(it))
                 .fitCenter()
@@ -30,5 +30,6 @@ object BindingAdapters : KoinComponent {
                 .into(view)
         }
     }
+
 }
 

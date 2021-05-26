@@ -23,34 +23,43 @@
         <action
             android:id="@+id/action_genresFragment_to_moviesFragment"
             app:destination="@id/moviesFragment"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
-            />
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
 
     <fragment
         android:id="@+id/moviesFragment"
         android:name="com.example.themoviesapp.ui.listmovie.MoviesFragment"
         android:label="MoviesFragment"
-        tools:layout="@layout/fragment_movies"
-        >
+        tools:layout="@layout/fragment_movies">
         <action
             android:id="@+id/action_moviesFragment_to_detailMovieFragment"
             app:destination="@id/detailMovieFragment"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
-            />
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
 
     <fragment
         android:id="@+id/detailMovieFragment"
         android:name="com.example.themoviesapp.ui.detailmovie.DetailMovieFragment"
         android:label="DetailMovieFragment"
-        tools:layout="@layout/fragment_detail_movie"
-        />
+        tools:layout="@layout/fragment_detail_movie">
+        <action
+            android:id="@+id/action_detailMovieFragment_to_reviewFragment"
+            app:destination="@id/reviewFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/reviewFragment"
+        android:name="com.example.themoviesapp.ui.review.ReviewFragment"
+        android:label="ReviewFragment"
+        tools:layout="@layout/fragment_review" />
 
 </navigation>

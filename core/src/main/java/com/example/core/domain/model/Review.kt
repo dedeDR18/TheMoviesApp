@@ -20,4 +20,4 @@ data class Review(
     val id: String,
     val updatedAt: String,
     val url: String
-): Parcelable
+) : Parcelable

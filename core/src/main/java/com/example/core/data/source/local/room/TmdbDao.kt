@@ -16,7 +16,7 @@ import kotlinx.coroutines.flow.Flow
  * Email      : dededarirahmadi@gmail.com
  */
 @Dao
-interface TmdbDao{
+interface TmdbDao {
 
     @Query("SELECT * FROM genreentities")
     fun getAllGenre(): Flow<List<GenreEntity>>

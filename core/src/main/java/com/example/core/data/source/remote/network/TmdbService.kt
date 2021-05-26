@@ -36,8 +36,8 @@ interface TmdbService {
 
     @GET("movie/{movieId}/reviews?api_key=${BuildConfig.API_KEY}&language=en-US")
     fun fetchMovieReview(
-        @Path("movieId") movieId:Int,
-        @Query("page") page:Int
+        @Path("movieId") movieId: Int,
+        @Query("page") page: Int
     ): Call<TmdbReviewResponse>
 
 }

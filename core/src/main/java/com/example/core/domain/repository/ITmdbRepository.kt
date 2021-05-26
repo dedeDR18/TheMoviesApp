@@ -1,11 +1,8 @@
 package com.example.core.domain.repository
 
-import androidx.paging.PagingConfig
-import androidx.paging.PagingData
-import androidx.paging.PagingSource
 import com.example.core.data.Resource
-import com.example.core.data.source.local.entity.MovieEntity
 import com.example.core.data.source.local.entity.MoviePagesKey
+import com.example.core.data.source.local.entity.ReviewPagesKey
 import com.example.core.domain.model.Genre
 import com.example.core.domain.model.Movie
 import com.example.core.domain.model.Review
@@ -25,7 +22,6 @@ interface ITmdbRepository {
     fun getMovieByGenre(genreId: Int): Flow<List<Movie>>
     fun getCurrentPage(genreId: Int): Flow<MoviePagesKey>
     fun fetchMovieReview(movieId: Int, page: Int): Flow<Resource<List<Review>>>
+    fun getReviewCurrentPage(movieId: Int): Flow<ReviewPagesKey>
 
-    //paging 3
-    //fun getMovieByGenrePagingFlow(): Flow<PagingData<MovieEntity>>
 }

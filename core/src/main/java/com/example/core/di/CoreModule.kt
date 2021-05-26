@@ -23,6 +23,7 @@ import java.util.concurrent.TimeUnit
 val databaseModule = module {
     factory { get<TmdbDatabase>().tmdbDao() }
     factory { get<TmdbDatabase>().tmdbPagesKeyDao() }
+    factory { get<TmdbDatabase>().tmdbReviewPagesKeyDao() }
     single {
         Room.databaseBuilder(
             androidContext(),
@@ -52,12 +53,6 @@ private fun createRetrofit(okHttpClient: OkHttpClient): TmdbService {
 }
 
 private fun createOkHttpClient(): OkHttpClient {
-//    val hostName = "min-api.cryptocompare.com"
-//    val certificatePinner = CertificatePinner.Builder()
-//        .add(hostName, "sha256/Xd+EsIDqyqDn1x3n0JYVVar+W73w1U0GxC8uZa6/QTk=")
-//        .add(hostName, "sha256/8Rw90Ej3Ttt8RRkrg+WYDS9n7IS03bk5bjP/UXPtaY8=")
-//        .add(hostName, "sha256/Ko8tivDrEjiY90yGasP6ZpBU4jwXvHqVvQI0GS3GNdA=")
-//        .build()
     return OkHttpClient.Builder()
         .addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
         .connectTimeout(120, TimeUnit.SECONDS)

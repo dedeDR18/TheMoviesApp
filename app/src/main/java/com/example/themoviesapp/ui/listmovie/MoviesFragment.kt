@@ -1,6 +1,8 @@
 package com.example.themoviesapp.ui.listmovie
 
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -51,17 +53,20 @@ class MoviesFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initRv()
+        Handler(Looper.getMainLooper()).postDelayed({
+            initRv()
 
-        navController = Navigation.findNavController(view)
+            navController = Navigation.findNavController(view)
 
-        genre?.let { genre ->
-            fetchData(genre.id, 1)
-        }
+            genre?.let { genre ->
+                fetchData(genre.id, 1)
+            }
 
-        observe()
-        handleLoadMore()
-        handleOnClick()
+            observe()
+            handleLoadMore()
+            handleOnClick()
+        }, 500)
+
     }
 
     private fun observe() {

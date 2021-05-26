@@ -17,4 +17,4 @@ data class AuthorDetails(
     val name: String,
     val rating: Int?,
     val username: String
-): Parcelable
+) : Parcelable

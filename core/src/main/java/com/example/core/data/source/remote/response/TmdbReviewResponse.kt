@@ -8,7 +8,7 @@ package com.example.core.data.source.remote.response
  */
 
 data class TmdbReviewResponse(
-    val id:Int,
+    val id: Int,
     val page: Int,
     val results: List<ReviewResponseItem?>,
     val total_pages: Int,

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="review"
+            type="com.example.core.domain.model.Review" />
+    </data>
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:paddingBottom="16dp">
+
+        <TextView
+            android:id="@+id/tv_username"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:textSize="16sp"
+            android:text="@{review.author}"
+            android:textStyle="italic|bold"
+            tools:text="dedeDR18" />
+
+        <TextView
+            android:id="@+id/tv_content_review"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_username"
+            android:text="@{review.content}"
+            android:textColor="@color/black"
+            tools:text="laksjdlaksjdajsdljaskdjalskjdlaksjdaskjdjdjdjlaskjdlaksjdlaksjdlaksdjalksjdalskdjaksjdlaskjdalksjdjklasidjliasduoasiudoasiudoasiudoasud" />
+
+    </RelativeLayout>
+
+</layout>

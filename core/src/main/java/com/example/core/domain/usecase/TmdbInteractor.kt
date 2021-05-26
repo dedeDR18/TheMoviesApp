@@ -1,9 +1,8 @@
 package com.example.core.domain.usecase
 
-import androidx.paging.PagingData
 import com.example.core.data.Resource
-import com.example.core.data.source.local.entity.MovieEntity
 import com.example.core.data.source.local.entity.MoviePagesKey
+import com.example.core.data.source.local.entity.ReviewPagesKey
 import com.example.core.domain.model.Genre
 import com.example.core.domain.model.Movie
 import com.example.core.domain.model.Review
@@ -34,7 +33,8 @@ class TmdbInteractor(private val repository: ITmdbRepository) : TmdbUsecase {
     override fun fetchMovieReview(movieId: Int, page: Int): Flow<Resource<List<Review>>> =
         repository.fetchMovieReview(movieId, page)
 
-    //paging 3
-    //override fun getMovieByGenrePagingFlow(): Flow<PagingData<MovieEntity>> = repository.getMovieByGenrePagingFlow()
+    override fun getReviewCurrentPage(movieId: Int): Flow<ReviewPagesKey> =
+        repository.getReviewCurrentPage(movieId)
+
 
 }

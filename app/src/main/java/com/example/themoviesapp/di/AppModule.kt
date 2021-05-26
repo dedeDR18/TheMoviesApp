@@ -5,6 +5,7 @@ import com.example.core.domain.usecase.TmdbUsecase
 import com.example.themoviesapp.ui.detailmovie.DetailViewModel
 import com.example.themoviesapp.ui.genres.GenresViewModel
 import com.example.themoviesapp.ui.listmovie.MoviesViewModel
+import com.example.themoviesapp.ui.review.ReviewViewModel
 import com.example.themoviesapp.ui.splash.SplashViewModel
 import org.koin.android.viewmodel.dsl.viewModel
 import org.koin.dsl.module
@@ -24,4 +25,5 @@ val viewmodelModule = module {
     viewModel { SplashViewModel(get()) }
     viewModel { MoviesViewModel(get()) }
     viewModel { DetailViewModel(get()) }
+    viewModel { ReviewViewModel(get()) }
 }

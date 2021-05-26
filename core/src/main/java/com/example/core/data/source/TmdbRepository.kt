@@ -1,18 +1,11 @@
 package com.example.core.data.source
 
 import android.util.Log
-import androidx.paging.ExperimentalPagingApi
-import androidx.paging.Pager
-import androidx.paging.PagingConfig
-import androidx.paging.PagingData
 import com.example.core.data.Resource
-import com.example.core.data.source.local.entity.MovieEntity
 import com.example.core.data.source.local.entity.MoviePagesKey
-import com.example.core.data.source.local.room.TmdbDao
+import com.example.core.data.source.local.entity.ReviewPagesKey
 import com.example.core.data.source.local.room.TmdbDatabase
-import com.example.core.data.source.remote.network.ApiResponse
 import com.example.core.data.source.remote.network.TmdbService
-import com.example.core.data.source.remote.response.MovieResponse
 import com.example.core.domain.model.Genre
 import com.example.core.domain.model.Movie
 import com.example.core.domain.model.Review
@@ -24,7 +17,6 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.launch
 import retrofit2.awaitResponse
-import java.lang.Exception
 
 /**
  * Created on : 21/05/21 | 01.32
@@ -111,10 +103,21 @@ class TmdbRepository(
         emit(Resource.Loading())
         try {
             val response = apiService.fetchMovieReview(movieId, page).awaitResponse()
-            if (response.isSuccessful){
+            if (response.isSuccessful) {
                 val data = response.body()
                 data?.let {
                     val listReview = it.results
+                    tmdbDatabase.tmdbReviewPagesKeyDao()
+                        .saveReviewPageKeys(
+                            listOf(
+                                ReviewPagesKey(
+                                    movieId,
+                                    it.page,
+                                    it.total_pages,
+                                    it.total_results
+                                )
+                            )
+                        )
                     emit(Resource.Success(DataMapper.mapReviewResponseToReviewDomain(listReview)))
                 }
             } else {
@@ -123,6 +126,12 @@ class TmdbRepository(
             }
         } catch (e: Exception) {
             emit(Resource.Error("Error ${e.message}"))
+        }
+    }
+
+    override fun getReviewCurrentPage(movieId: Int): Flow<ReviewPagesKey> = flow {
+        tmdbDatabase.tmdbReviewPagesKeyDao().getReviewPagesKey(movieId).collect {
+            emit(it)
         }
     }
 }

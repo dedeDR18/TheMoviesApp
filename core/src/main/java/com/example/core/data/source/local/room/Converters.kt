@@ -27,7 +27,7 @@ class Converters {
 
     @TypeConverter
     fun fromList(list: List<Int>): String {
-        var genreIds=""
+        var genreIds = ""
         for (i in list) genreIds += ",$i"
         return genreIds
     }
